@@ -3,11 +3,10 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Dict
 import random
-from fastapi.responses import FileResponse
 
 app = FastAPI()
 
-# Serve static files
+# Serve static files on a dedicated path
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # In-memory storage for stock prices
@@ -24,9 +23,8 @@ class Stock(BaseModel):
 
 @app.get("/")
 async def read_root():
-    # route to the index.html file
-    return FileResponse('static/index.html')
-    
+    return {"message": "Welcome to the Stock Price Tracker API"}
+
 @app.get("/stocks")
 async def get_all_stocks():
     return [{"symbol": symbol, "price": price} for symbol, price in stocks.items()]
