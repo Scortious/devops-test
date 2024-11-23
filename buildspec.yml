@@ -24,7 +24,7 @@ phases:
       - pytest tests/ --junitxml=results.xml
       - echo "Building the application..."
       - mkdir -p artifact
-      - cp -r main.py static/ artifact/
+      - cp -r app.py static/ artifact/
 
   post_build:
     commands:
